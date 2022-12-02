@@ -11,5 +11,5 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-@import "uview-max/index.scss";
+@import "@/uview-max/index.scss";
 </style>

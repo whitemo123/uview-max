@@ -30,7 +30,10 @@ export default {
         badgeStyle: {
             type: [Object, String],
             default: defprops.tabbarItem.badgeStyle
+        },
+        iconSize: {
+            type: [String, Number],
+            default: defprops.tabbarItem.iconSize
         }
-
     }
 }

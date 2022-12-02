@@ -9,7 +9,7 @@
 			    v-if="icon"
 			    :name="icon"
 			    :color="isActive? parentData.activeColor : parentData.inactiveColor"
-			    :size="20"
+			    :size="iconSize"
 			></u-icon>
 			<template v-else>
 				<slot
@@ -30,7 +30,7 @@
 			    :show="dot || badge > 0"
 			></u-badge>
 		</view>
-		
+
 		<slot name="text">
 			<text
 			    class="u-tabbar-item__text"
@@ -57,7 +57,7 @@
 	 * @property {String}			text		描述文本
 	 * @property {Object | String}	badgeStyle	控制徽标的位置，对象或者字符串形式，可以设置top和right属性（默认 'top: 6px;right:2px;' ）
 	 * @property {Object}			customStyle	定义需要用到的外部样式
-	 * 
+	 *
 	 * @example <u-tabbar :value="value2" :placeholder="false" @change="name => value2 = name" :fixed="false" :safeAreaInsetBottom="false"><u-tabbar-item text="首页" icon="home" dot ></u-tabbar-item></u-tabbar>
 	 */
 	export default {
@@ -125,7 +125,7 @@
 		flex: 1;
 		width: 100%;
 		height: 100%;
-		
+
 		&__icon {
 			@include flex;
 			position: relative;

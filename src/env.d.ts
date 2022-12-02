@@ -7,4 +7,4 @@ declare module '*.vue' {
   export default component
 }
 
-declare module "uview-max"
+declare module "@/uview-max"

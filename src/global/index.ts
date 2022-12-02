@@ -7,7 +7,7 @@
  */
 import { App } from "vue";
 import store from "@/store";
-import uviewMax from 'uview-max'
+import uviewMax from '@/uview-max'
 
 export default (app: App) => {
   // 全局安装pinia

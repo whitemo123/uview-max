@@ -1,6 +1,8 @@
 {
   "easycom": {
-    "^u-(.*)": "@/uview-max/components/u-$1/u-$1.vue"
+    "custom": {
+      "^u-(.*)": "@/uview-max/components/u-$1/u-$1.vue"
+    }
   },
 	"pages": [
 		{
