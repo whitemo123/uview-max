@@ -1,210 +1,112 @@
 <template>
-  <view class="wrap">
-    <u-waterfall v-model:value="flowList" ref="uWaterfall">
-      <template v-slot:left="{leftList}">
-        <view class="demo-warter" v-for="(item, index) in leftList" :key="index">
-          <!-- 警告：微信小程序中需要hx2.8.11版本才支持在template中结合其他组件，比如下方的lazy-load组件 -->
-          <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
-          <view class="demo-title">
-            {{ item.title }}
-          </view>
-          <view class="demo-price">
-            {{ item.price }}元
-          </view>
-          <view class="demo-tag">
-            <view class="demo-tag-owner">
-              自营
-            </view>
-            <view class="demo-tag-text">
-              放心购
-            </view>
-          </view>
-          <view class="demo-shop">
-            {{ item.shop }}
-          </view>
-          <u-icon name="close-circle-fill" color="#fa3534" size="34" class="u-close"></u-icon>
+  <view>
+    <button @click="handleClick">click</button>
+    <u-waterfall-fake :listData="listData">
+      <template v-slot:left="{ entity, index }">
+        <view class="goods">
+          <image :src="entity.img"></image>
+          <view>{{entity.name}}</view>
         </view>
       </template>
-      <template v-slot:right="{rightList}">
-        <view class="demo-warter" v-for="(item, index) in rightList" :key="index">
-          <u-lazy-load threshold="-450" border-radius="10" :image="item.image" :index="index"></u-lazy-load>
-          <view class="demo-title">
-            {{ item.title }}
-          </view>
-          <view class="demo-price">
-            {{ item.price }}元
-          </view>
-          <view class="demo-tag">
-            <view class="demo-tag-owner">
-              自营
-            </view>
-            <view class="demo-tag-text">
-              放心购
-            </view>
-          </view>
-          <view class="demo-shop">
-            {{ item.shop }}
-          </view>
-          <u-icon name="close-circle-fill" color="#fa3534" size="34" class="u-close"></u-icon>
+      <template v-slot:right="{ entity, index }">
+        <view class="goods">
+          <image :src="entity.img"></image>
+          <view>{{entity.name}}</view>
         </view>
       </template>
-    </u-waterfall>
+    </u-waterfall-fake>
   </view>
 </template>
-
 <script setup lang="ts">
-import {ref} from "vue";
-import {onLoad} from "@dcloudio/uni-app";
+import {ref, reactive, computed} from 'vue';
+import waterfalls from "@/components/waterfalls/waterfalls"
 
-const flowList = ref<any>([]);
-const list = [
+const listData = ref<any>([{
+  img: 'https://thorui.cn/images/mall/product/1.jpg',
+  name: '欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜 30ml（欧莱雅彩妆 BB霜 粉BB 遮瑕疵 隔离）',
+  sale: 599,
+  factory: 899,
+  payNum: 2342
+},
   {
-    price: 35,
-    title: '北国风光，千里冰封，万里雪飘',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic.sc.chinaz.com/Files/pic/pic9/202002/zzpic23327_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/2.jpg',
+    name: '德国DMK进口牛奶  欧德堡（Oldenburger）超高温处理全脂纯牛奶1L*12盒',
+    sale: 29,
+    factory: 69,
+    payNum: 999
   },
   {
-    price: 75,
-    title: '望长城内外，惟余莽莽',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic.sc.chinaz.com/Files/pic/pic9/202002/zzpic23325_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/3.jpg',
+    name: '【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红',
+    sale: 299,
+    factory: 699,
+    payNum: 666
   },
   {
-    price: 385,
-    title: '大河上下，顿失滔滔',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/4.jpg',
+    name: '百雀羚套装女补水保湿护肤品',
+    sale: 1599,
+    factory: 2899,
+    payNum: 236
   },
   {
-    price: 784,
-    title: '欲与天公试比高',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/zzpic23369_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/5.jpg',
+    name: '百草味 肉干肉脯 休闲零食 靖江精制猪肉脯200g/袋',
+    sale: 599,
+    factory: 899,
+    payNum: 2399
   },
   {
-    price: 7891,
-    title: '须晴日，看红装素裹，分外妖娆',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2130_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/6.jpg',
+    name: '短袖睡衣女夏季薄款休闲家居服短裤套装女可爱韩版清新学生两件套 短袖粉色长颈鹿 M码75-95斤',
+    sale: 599,
+    factory: 899,
+    payNum: 2399
   },
   {
-    price: 2341,
-    shop: '李白杜甫白居易旗舰店',
-    title: '江山如此多娇，引无数英雄竞折腰',
-    image: 'http://pic1.sc.chinaz.com/Files/pic/pic9/202002/zzpic23346_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/1.jpg',
+    name: '欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜',
+    sale: 599,
+    factory: 899,
+    payNum: 2342
   },
   {
-    price: 661,
-    shop: '李白杜甫白居易旗舰店',
-    title: '惜秦皇汉武，略输文采',
-    image: 'http://pic1.sc.chinaz.com/Files/pic/pic9/202002/zzpic23344_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/2.jpg',
+    name: '德国DMK进口牛奶',
+    sale: 29,
+    factory: 69,
+    payNum: 999
   },
   {
-    price: 1654,
-    title: '唐宗宋祖，稍逊风骚',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic1.sc.chinaz.com/Files/pic/pic9/202002/zzpic23343_s.jpg',
+    img: 'https://thorui.cn/images/mall/product/3.jpg',
+    name: '【第2支1元】柔色尽情丝柔口红唇膏女士不易掉色保湿滋润防水 珊瑚红',
+    sale: 299,
+    factory: 699,
+    payNum: 666
   },
   {
-    price: 1678,
-    title: '一代天骄，成吉思汗',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic1.sc.chinaz.com/Files/pic/pic9/202002/zzpic23343_s.jpg',
-  },
-  {
-    price: 924,
-    title: '只识弯弓射大雕',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic1.sc.chinaz.com/Files/pic/pic9/202002/zzpic23343_s.jpg',
-  },
-  {
-    price: 8243,
-    title: '俱往矣，数风流人物，还看今朝',
-    shop: '李白杜甫白居易旗舰店',
-    image: 'http://pic1.sc.chinaz.com/Files/pic/pic9/202002/zzpic23343_s.jpg',
-  },
-]
+    img: 'https://thorui.cn/images/mall/product/4.jpg',
+    name: '百雀羚套装女补水保湿护肤品',
+    sale: 1599,
+    factory: 2899,
+    payNum: 236
+  }])
 
-const addRandomData = () => {
-  for (let i = 0; i < 10; i++) {
-    let index = parseInt((Math.random() * 10));
-    // 先转成字符串再转成对象，避免数组对象引用导致数据混乱
-    let item = JSON.parse(JSON.stringify(list[index]))
-    item.id = Math.random() + 1000;
-    flowList.value.push(item);
-  }
+const handleClick = () => {
+  listData.value[1].name = "修改"
+  setTimeout(() => {
+    listData.value = []
+  }, 3000)
 }
-
-onLoad(() => {
-  addRandomData();
-})
 </script>
-
-<style>
-.demo-warter {
-  border-radius: 8px;
-  margin: 5px;
-  background-color: #ffffff;
-  padding: 8px;
-  position: relative;
-}
-
-.u-close {
-  position: absolute;
-  top: 32rpx;
-  right: 32rpx;
-}
-
-.demo-image {
+<style lang="scss" scoped>
+.goods {
   width: 100%;
-  border-radius: 4px;
-}
-
-.demo-title {
-  font-size: 30rpx;
-  margin-top: 5px;
-  color: red;
-}
-
-.demo-tag {
-  display: flex;
-  margin-top: 5px;
-}
-
-.demo-tag-owner {
-  background-color: red;
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  padding: 4rpx 14rpx;
-  border-radius: 50rpx;
-  font-size: 20rpx;
-  line-height: 1;
-}
-
-.demo-tag-text {
-  border: 1px solid red;
-  color: red;
-  margin-left: 10px;
-  border-radius: 50rpx;
-  line-height: 1;
-  padding: 4rpx 14rpx;
-  display: flex;
-  align-items: center;
-  border-radius: 50rpx;
-  font-size: 20rpx;
-}
-
-.demo-price {
-  font-size: 30rpx;
-  color: red;
-  margin-top: 5px;
-}
-
-.demo-shop {
-  font-size: 22rpx;
-  color: red;
-  margin-top: 5px;
+  image {
+    width: 100%;
+  }
+  view {
+    width: 100%;
+  }
 }
 </style>

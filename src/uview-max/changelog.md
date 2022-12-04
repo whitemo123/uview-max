@@ -1,3 +1,5 @@
+## 1.1.2（2022-12-04）
+新增 u-waterfall-fake组件
 ## 1.1.1（2022-12-02）
 新增 u-tabbar-item iconSize, 新增 u-waterfal、u-lazy-load
 ## 1.0.1（2022-11-24）
