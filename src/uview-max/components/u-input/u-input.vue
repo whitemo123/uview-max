@@ -242,6 +242,8 @@ export default {
             // 格式化过滤方法
             const formatter = this.formatter || this.innerFormatter
             const formatValue = formatter(value)
+            // 外抛input事件
+            this.$emit("input", value)
             // 为了避免props的单向数据流特性，需要先将innerValue值设置为当前值，再在$nextTick中重新赋予设置后的值才有效
             this.innerValue = value
             this.$nextTick(() => {
@@ -351,7 +353,7 @@ export default {
             @include flex(row);
             margin: 0;
             flex: 1;
-			
+
 			&__field {
 				line-height: 26px;
 				text-align: left;

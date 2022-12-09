@@ -1,5 +1,6 @@
 <template>
   <view>
+    <u-input v-model="str" @input="handleInput" @blur="handleInput"></u-input>
     <button @click="handleClick">click</button>
     <u-waterfall-fake :listData="listData">
       <template v-slot:left="{ entity, index }">
@@ -20,7 +21,7 @@
 <script setup lang="ts">
 import {ref, reactive, computed} from 'vue';
 import waterfalls from "@/components/waterfalls/waterfalls"
-
+const str = ref("")
 const listData = ref<any>([{
   img: 'https://thorui.cn/images/mall/product/1.jpg',
   name: '欧莱雅（LOREAL）奇焕光彩粉嫩透亮修颜霜 30ml（欧莱雅彩妆 BB霜 粉BB 遮瑕疵 隔离）',
@@ -97,6 +98,10 @@ const handleClick = () => {
   setTimeout(() => {
     listData.value = []
   }, 3000)
+}
+
+const handleInput = (e: any) => {
+  console.log(e)
 }
 </script>
 <style lang="scss" scoped>
