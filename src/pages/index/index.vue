@@ -1,6 +1,6 @@
 <template>
   <view>
-    <u-input v-model="str" @input="handleInput" @blur="handleInput"></u-input>
+    <u-input v-model="str" @input="handleInput"></u-input>
     <button @click="handleClick">click</button>
     <u-waterfall-fake :listData="listData">
       <template v-slot:left="{ entity, index }">
@@ -101,7 +101,7 @@ const handleClick = () => {
 }
 
 const handleInput = (e: any) => {
-  console.log(e)
+  str.value = "修改"
 }
 </script>
 <style lang="scss" scoped>
