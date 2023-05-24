@@ -121,6 +121,11 @@ export default {
         showTitle: {
             type: Boolean,
             default: defprops.swiper.showTitle
+        },
+        // 是否视频自动播放
+        videoAutoPlay: {
+            type: Boolean,
+            default: defprops.swiper.videoAutoPlay
         }
     }
 }

@@ -33,7 +33,8 @@ export default {
         bgColor: '#f3f4f6',
         radius: 4,
         loading: false,
-        showTitle: false
+        showTitle: false,
+        videoAutoPlay: false,
     }
 
 }

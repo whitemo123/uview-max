@@ -64,6 +64,8 @@
 						:style="{
 							height: $u.addUnit(height)
 						}"
+            :autoplay="videoAutoPlay"
+            :muted="videoAutoPlay"
 						controls
 						@tap="clickHandler(index)"
 					></video>
