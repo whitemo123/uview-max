@@ -1,0 +1,6 @@
+@mixin vue-flex($direction: row) {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	flex-direction: $direction;
+	/* #endif */
+}

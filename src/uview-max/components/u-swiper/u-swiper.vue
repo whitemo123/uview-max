@@ -65,8 +65,9 @@
 							height: $u.addUnit(height)
 						}"
             :autoplay="videoAutoPlay"
+            :show-fullscreen-btn="false"
             :muted="videoAutoPlay"
-						controls
+            :show-mute-btn="true"
 						@tap="clickHandler(index)"
 					></video>
 					<text
@@ -212,8 +213,8 @@
 		@include flex;
 		justify-content: center;
 		align-items: center;
-		position: relative;
 		overflow: hidden;
+    position: relative;
 
 		&__wrapper {
 			flex: 1;
@@ -223,7 +224,7 @@
 
 				&__wrapper {
 					@include flex;
-					position: relative;
+          position: relative;
 					overflow: hidden;
 					transition: transform 0.3s;
 					flex: 1;
