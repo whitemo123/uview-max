@@ -22,6 +22,7 @@ export default {
         labelColor: '',
         size: '',
         iconColor: '',
-        placement: ''
+        placement: '',
+      isCancel: ''
     }
 }

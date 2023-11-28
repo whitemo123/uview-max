@@ -50,16 +50,17 @@
 	 * @property {String | Number}	labelSize		label字体大小，单位px
 	 * @property {String | Number}	label			label提示文字，因为nvue下，直接slot进来的文字，由于特殊的结构，无法修改样式
 	 * @property {String | Number}	size			整体的大小
+   * @property {String | Number}	isCancel			是否可以取消选中
 	 * @property {String}			iconColor		图标颜色
 	 * @property {String}			labelColor		label的颜色
 	 * @property {Object}			customStyle		组件的样式，对象形式
-	 * 
+	 *
 	 * @event {Function} change 某个radio状态发生变化时触发(选中状态)
 	 * @example <u-radio :labelDisabled="false">门掩黄昏，无计留春住</u-radio>
 	 */
 	export default {
 		name: "u-radio",
-		
+
 		mixins: [mpMixin, mixin,props],
 		data() {
 			return {
@@ -80,11 +81,15 @@
 					iconColor: null,
 					placement: 'row',
 					borderBottom: false,
-					iconPlacement: 'left'
+					iconPlacement: 'left',
+          isCancel: false
 				}
 			}
 		},
 		computed: {
+      elIsCancel() {
+        return this.isCancel!== ''? this.isCancel : this.parentData.isCancel? this.parentData.isCancel : false
+      },
 			// 是否禁用，如果父组件u-raios-group禁用的话，将会忽略子组件的配置
 			elDisabled() {
 				return this.disabled !== '' ? this.disabled : this.parentData.disabled !== null ? this.parentData.disabled : false;
@@ -234,8 +239,11 @@
 			// 将本组件外的其他u-radio的checked都设置为false(都被取消选中状态)，因而只剩下一个为选中状态
 			setRadioCheckedStatus() {
 				this.emitEvent()
-				// 将本组件标记为选中状态
-				this.checked = true
+        if (this.elIsCancel){
+          this.checked = !this.checked
+        }else {
+          this.checked = true
+        }
 				typeof this.parent.unCheckedOther === 'function' && this.parent.unCheckedOther(this)
 			}
 		}
@@ -261,7 +269,7 @@
 	$u-radio-label-color:$u-content-color !default;
 	$u-radio-label-font-size:15px !default;
 	$u-radio-label-disabled-color:#c8c9cc !default;
-	
+
 	.u-radio {
 		/* #ifndef APP-NVUE */
 		@include flex(row);
@@ -271,7 +279,7 @@
 		align-items: center;
 		margin-bottom: 5px;
 		margin-top: 5px;
-		
+
 		&-label--left {
 			flex-direction: row
 		}

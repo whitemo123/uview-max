@@ -54,7 +54,7 @@
 					this.iconSize, this.borderBottom, this.placement
 				]
 				// #endif
-				
+
 			},
 			bemClass() {
 				// this.bem为一个computed变量，在mixin中
@@ -84,26 +84,51 @@
     	// #endif
 		methods: {
 			// 将其他的radio设置为未选中的状态
-			unCheckedOther(childInstance) {
-				this.children.map(child => {
-					// 所有子radio中，被操作组件实例的checked的值无需修改
-					if (childInstance !== child) {
-						child.checked = false
-					}
-				})
-				const {
-					name
-				} = childInstance
-				// 通过emit事件，设置父组件通过v-model双向绑定的值
-				// #ifdef VUE3
-                this.$emit("update:modelValue", name);
-                // #endif
-                // #ifdef VUE2
-                this.$emit("input", name);
-				// #endif
-				// 发出事件
-				this.$emit('change', name)
-			},
+      unCheckedOther(childInstance) {
+        this.children.map(child => {
+          // 所有子radio中，被操作组件实例的checked的值无需修改
+          if (childInstance !== child) {
+            child.checked = false
+          }
+        })
+        const {
+          name
+        } = childInstance
+        // // 通过emit事件，设置父组件通过v-model双向绑定的值
+        // // #ifdef VUE3
+        //         this.$emit("update:modelValue", name);
+        //         // #endif
+        //         // #ifdef VUE2
+        //         this.$emit("input", name);
+        // // #endif
+        // // 发出事件
+        // this.$emit('change', name)
+        let bool = false
+        this.children.forEach(item=>{
+          if(item.checked==true){
+            bool = true
+          }
+        })
+        if(bool){
+          // #ifdef VUE3
+          this.$emit("update:modelValue", name);
+          // #endif
+          // #ifdef VUE2
+          this.$emit("input", name);
+          // #endif
+          // 发出事件
+          this.$emit('change', name)
+        }else{
+          // #ifdef VUE3
+          this.$emit("update:modelValue", null);
+          // #endif
+          // #ifdef VUE2
+          this.$emit("input", null);
+          // #endif
+          // 发出事件
+          this.$emit('change', null)
+        }
+      },
 		}
 	}
 </script>

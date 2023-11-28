@@ -65,6 +65,11 @@ export default {
         iconColor: {
             type: String,
             default: defprops.radio.iconColor
+        },
+        // 可否取消
+        isCancel:{
+            type: [String, Boolean],
+            default: defprops.radio.isCancel
         }
     }
 }
